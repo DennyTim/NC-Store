@@ -9,6 +9,7 @@ import {
 
 // middlewares
 import { advancedResults } from '../middleware/advanced-results';
+import { protect, authorize } from '../middleware/auth';
 
 // models
 import Course from '../models/Course';
@@ -20,10 +21,10 @@ router.route('/')
         path: 'bootcamp',
         select: 'name description',
       }), getCourses)
-      .post(addCourse);
+      .post(protect, authorize('publisher', 'admin'), addCourse);
 router.route('/:id')
       .get(getCourse)
-      .put(updateCourse)
-      .delete(deleteCourse);
+      .put(protect, authorize('publisher', 'admin'), updateCourse)
+      .delete(protect, authorize('publisher', 'admin'), deleteCourse);
 
 export default router;

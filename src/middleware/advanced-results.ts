@@ -4,7 +4,7 @@ import {
   Response,
 } from 'express';
 
-export const advancedResults = ( model, populate ) =>
+export const advancedResults = ( model, populate? ) =>
   async ( req: Request, res: Response, next: NextFunction ) => {
 
     let query;

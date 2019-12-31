@@ -3,6 +3,7 @@ import path from 'path';
 import express from 'express';
 import morgan from 'morgan';
 import fileupload from 'express-fileupload';
+import cookieParser from 'cookie-parser';
 
 // Load env vars
 dotenv.config();
@@ -10,6 +11,9 @@ dotenv.config();
 // Route files
 import bootcamps from './routes/bootcamps';
 import courses from './routes/courses';
+import auth from './routes/auth';
+import users from './routes/users';
+import reviews from './routes/reviews';
 // Middlewares
 import { errorHandler } from './middleware/error';
 // Connect to Mongo
@@ -22,6 +26,9 @@ const app = express();
 
 // Body parser
 app.use(express.json());
+
+// Cookie parser
+app.use(cookieParser());
 
 // Dev logging middleware
 if (process.env.NODE_ENV === 'development') {
@@ -37,6 +44,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Mount routers
 app.use('/api/v1/bootcamps', bootcamps);
 app.use('/api/v1/courses', courses);
+app.use('/api/v1/auth', auth);
+app.use('/api/v1/users', users);
+app.use('/api/v1/reviews', reviews);
 
 // Mount middlewares
 app.use(errorHandler);

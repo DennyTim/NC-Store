@@ -5,6 +5,7 @@ import {
   Document,
   model,
   Schema,
+  Types,
 } from 'mongoose';
 
 // tslint:disable-next-line:interface-name
@@ -25,6 +26,7 @@ export interface BootcampModel extends Document {
   jobGuarantee?: any;
   acceptGi?: any;
   createdAt?: any;
+  user?: any;
 }
 
 const BootcampSchema: Schema = new Schema({
@@ -111,6 +113,11 @@ const BootcampSchema: Schema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now,
+  },
+  user: {
+    type: Types.ObjectId,
+    ref: 'User',
+    required: true,
   },
 }, {
   toJSON: {

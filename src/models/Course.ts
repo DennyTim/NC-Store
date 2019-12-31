@@ -15,6 +15,7 @@ export interface CourseModel extends Document {
   scholarshipAvailable: any;
   createdAt: any;
   bootcamp: any;
+  user: any;
 }
 
 const CourseSchema: Schema = new Schema({
@@ -51,6 +52,11 @@ const CourseSchema: Schema = new Schema({
   bootcamp: {
     type: Types.ObjectId,
     ref: 'Bootcamp',
+    required: true,
+  },
+  user: {
+    type: Types.ObjectId,
+    ref: 'User',
     required: true,
   },
 });
